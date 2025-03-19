@@ -1,0 +1,16 @@
+<ul class="list-group list-group-flush">
+  <% @users.each do |user| %>
+    <li class="list-group-item list-group-item-action">
+      <div class="d-flex">
+        <div class="flex-shrink-0">
+          <%= image_tag user.avatar_image, class: "me-3 rounded-circle border", width: 128 %>
+        </div>
+        <div class="flex-grow-1 ms-3">
+          <div class="">
+            <h5 class="mt-0"><%= link_to user.username, user_path(user.username), class: "text-decoration-none stretched-link" %></h5>
+        </div>
+        <p><%= user.bio %></p>
+      </div>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,46 @@
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-body py-3 d-flex align-items-center justify-content-between">
+        <h2 class="h5 m-0 p-0 d-flex align-items-center">
+          <%= image_tag photo.owner.avatar_image, class: "rounded-circle me-2", width: 36 %>
+
+          <%= link_to photo.owner.username, user_path(photo.owner.username), class: "text-dark link-underline-dark link-underline-opacity-0 link-underline-opacity-100-hover", data: { turbo: false } %>
+        </h2>
+
+        <div>
+          <% if photo.owner == current_user %>
+            <%= link_to edit_photo_path(photo), class: "btn btn-link btn-sm text-muted" do %>
+              <i class="fas fa-edit fa-fw"></i>
+            <% end %>
+
+            <%= button_to photo, method: :delete, class: "btn btn-link btn-sm text-muted", form_class: "d-inline-block" do %>
+              <i class="fas fa-trash fa-fw"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <%= image_tag photo.image, class: "img-fluid" %>
+
+      <div class="card-body">
+        <div class="mb-3 d-flex justify-content-between">
+          <%= render "photos/likes", photo: photo %>
+        </div>
+        <p class="card-text"><%= photo.caption %></p>
+      </div>
+
+      <% if policy(photo).show? %>
+        <ul class="list-group list-group-flush">
+          <% photo.comments.default_order.each do |comment| %>
+            <%= render "comments/comment", comment: comment %>
+          <% end %>
+          
+          <div class="card-body">
+            <%= render "comments/form", comment: photo.comments.build %>
+          </div>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

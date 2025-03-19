@@ -1,0 +1,29 @@
+<div class="modal fade" id="<%= target %>" data-keyboard="false" tabindex="-1" aria-labelledby="backdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="backdropLabel">
+          <%= user.username %>'s <%= description %>
+          
+          <span class="badge badge-pill text-bg-secondary">
+            <%= connected_users.size %>
+          </span>
+        </h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <% connected_users.each do |other_user| %>
+          <li class="list-group-item">
+            <%= link_to other_user.username, user_path(other_user.username), data: { turbo: false } %>
+          </li>
+        <% end %>
+      </ul>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-block" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

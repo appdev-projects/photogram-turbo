@@ -1,0 +1,17 @@
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <%= render "users/user", user: @user %>
+  </div>
+</div>
+
+<% if policy(@user).show? %>
+  <div class="row mb-2">
+    <div class="col-md-6 offset-md-3">
+      <%= render "users/profile_nav", user: @user %>
+    </div>
+  </div>
+
+  <% @user.own_photos.each do |photo| %>
+    <%= render "photos/photo", photo: photo %>
+  <% end %>
+<% end %>

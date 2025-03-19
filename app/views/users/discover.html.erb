@@ -1,0 +1,16 @@
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <h1 class="display-4">
+      discover
+
+    </h1>
+    
+    <p class="lead text-muted">posts liked by people you follow</p>
+  </div>
+</div>
+
+<% @user.discover.latest.each do |photo| %>
+  <% if !photo.owner.private? || @user.leaders.include?(photo.owner) %>
+    <%= render "photos/photo", photo: photo %>
+  <% end %>
+<% end %>
