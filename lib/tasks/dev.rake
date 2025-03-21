@@ -43,8 +43,6 @@ task sample_data: :environment do
       private: secret,
       avatar_image: "https://robohash.org/#{username}"
     )
-
-    p user.errors.full_messages
   end
 
   users = User.all
@@ -60,8 +58,6 @@ task sample_data: :environment do
           recipient: second_user,
           status: status
         )
-
-        p first_user_follow_request.errors.full_messages
       end
 
       if rand < 0.75
@@ -73,8 +69,6 @@ task sample_data: :environment do
           recipient: first_user,
           status: status
         )
-
-        p second_user_follow_request.errors.full_messages
       end
     end
   end
@@ -82,8 +76,8 @@ task sample_data: :environment do
   users.each do |user|
     rand(15).times do
       # This allows the image to display whether in a codespace, deployed, or local environment
-      image_url = if ENV.fetch("CODESPACES_NAME", nil).present?
-        "https://#{ENV.fetch("CODESPACES_NAME")}-3000.app.github.dev/#{rand(1..10)}.jpeg"
+      image_url = if ENV.fetch("CODESPACE_NAME", nil).present?
+        "https://#{ENV.fetch("CODESPACE_NAME")}-3000.app.github.dev/#{rand(1..10)}.jpeg"
       elsif ENV.fetch("APPLICATION_HOST", nil).present?
         "https://#{ENV.fetch("APPLICATION_HOST")}/#{rand(1..10)}.jpeg"
       else
@@ -95,8 +89,6 @@ task sample_data: :environment do
         image: image_url
       )
 
-      p photo.errors.full_messages
-
       user.followers.each do |follower|
         if rand < 0.5
           photo.fans << follower
@@ -107,8 +99,6 @@ task sample_data: :environment do
             body: Faker::Quote.jack_handey,
             author: follower
           )
-
-          p comment.errors.full_messages
         end
       end
     end
