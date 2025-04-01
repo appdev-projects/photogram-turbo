@@ -9,19 +9,19 @@ RSpec.describe LikesController, type: :controller do
         username: "test",
         email: "test@example.com",
         password: "password",
-        avatar_image: "https://robohash.org/test.png"
+        avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg")
       )
 
       fan = User.create(
         username: "fan",
         email: "fan@example.com",
         password: "password",
-        avatar_image: "https://robohash.org/fan.png"
+        avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg")
       )
 
       photo = Photo.create(
         caption: "hi there :3",
-        image: "https://robohash.org/photo.png",
+        image: File.open("#{Rails.root}/spec/support/test_image.jpeg"),
         owner: owner
       )
 
@@ -42,19 +42,19 @@ RSpec.describe LikesController, type: :controller do
         username: "test",
         email: "test@example.com",
         password: "password",
-        avatar_image: "https://robohash.org/test.png"
+        avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg")
       )
 
       fan = User.create(
         username: "fan",
         email: "fan@example.com",
         password: "password",
-        avatar_image: "https://robohash.org/fan.png"
+        avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg")
       )
 
       photo = Photo.create(
         caption: "hi there :3",
-        image: "https://robohash.org/photo.png",
+        image: File.open("#{Rails.root}/spec/support/test_image.jpeg"),
         owner: owner
       )
 

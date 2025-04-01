@@ -2,10 +2,10 @@ require "rails_helper"
 
 describe "Authorization" do
   it "does not allow a user to access another user's feed", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: "https://robohash.org/bob")
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
 
     visit "/"
 
@@ -16,10 +16,10 @@ describe "Authorization" do
   end
 
   it "does not allow a user to access another user's discover", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: "https://robohash.org/bob")
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
 
     visit "/"
 
@@ -30,11 +30,11 @@ describe "Authorization" do
   end
 
   it "does not show user icon to delete another user's photo", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: "https://robohash.org/bob")
-    photo = Photo.create(image: "https://robohash.org/test", caption: "caption", owner_id: other_user.id)
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
+    photo = Photo.create(image: File.open("#{Rails.root}/spec/support/test_image.jpeg"), caption: "caption", owner_id: other_user.id)
 
     visit "/photos/#{photo.id}"
 
@@ -49,11 +49,11 @@ describe "Authorization" do
   end
 
   it "does not show user icon to edit another user's photo", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: "https://robohash.org/bob")
-    photo = Photo.create(image: "https://robohash.org/test", caption: "caption", owner_id: other_user.id)
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
+    photo = Photo.create(image: File.open("#{Rails.root}/spec/support/test_image.jpeg"), caption: "caption", owner_id: other_user.id)
 
     visit "/photos/#{photo.id}"
 
@@ -68,11 +68,11 @@ describe "Authorization" do
   end
 
   it "does not show user icon to delete another user's comment", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: "https://robohash.org/bob")
-    photo = Photo.create(image: "https://robohash.org/test", caption: "caption", owner_id: other_user.id)
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
+    photo = Photo.create(image: File.open("#{Rails.root}/spec/support/test_image.jpeg"), caption: "caption", owner_id: other_user.id)
     comment = Comment.create(photo_id: photo.id, author_id: other_user.id, body: "comment")
 
     visit "/photos/#{photo.id}"
@@ -87,11 +87,11 @@ describe "Authorization" do
   end
 
   it "does not show user icon to edit another user's comment", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: "https://robohash.org/bob")
-    photo = Photo.create(image: "https://robohash.org/test", caption: "caption", owner_id: other_user.id)
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
+    photo = Photo.create(image: File.open("#{Rails.root}/spec/support/test_image.jpeg"), caption: "caption", owner_id: other_user.id)
     comment = Comment.create(photo_id: photo.id, author_id: other_user.id, body: "comment")
 
     visit "/photos/#{photo.id}"
@@ -106,11 +106,11 @@ describe "Authorization" do
   end
 
   it "does not show photos on a private user's profile page", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    private_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: "https://robohash.org/bob", private: true)
-    photo = Photo.create(image: "https://robohash.org/test", caption: "caption", owner_id: private_user.id)
+    private_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
+    photo = Photo.create(image: File.open("#{Rails.root}/spec/support/test_image.jpeg"), caption: "caption", owner_id: private_user.id)
 
     visit "/#{private_user.username}"
 
@@ -120,11 +120,11 @@ describe "Authorization" do
   end
 
   it "does not show another user's pending follow requests", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: "https://robohash.org/bob")
-    third_user = User.create(username: "charlie", email: "charlie@example.com", password: "password", avatar_image: "https://robohash.org/charlie")
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
+    third_user = User.create(username: "charlie", email: "charlie@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     FollowRequest.create(sender_id: other_user.id, recipient_id: third_user.id, status: "pending")
 
     visit "/#{third_user.username}"
@@ -133,7 +133,7 @@ describe "Authorization" do
   end
 
   it "does not allow a user to view all photos", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/photos"
@@ -142,7 +142,7 @@ describe "Authorization" do
   end
 
   it "does not allow a user to view all likes", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/likes"
@@ -151,10 +151,10 @@ describe "Authorization" do
   end
 
   it "does not allow a user to view a like show page", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    photo = Photo.create(image: "https://robohash.org/test", caption: "caption", owner_id: user.id)
+    photo = Photo.create(image: File.open("#{Rails.root}/spec/support/test_image.jpeg"), caption: "caption", owner_id: user.id)
     like = Like.create(photo_id: photo.id, fan_id: user.id)
 
     visit "/likes/#{like.id}"
@@ -163,10 +163,10 @@ describe "Authorization" do
   end
 
   it "does not allow a user to view a like edit page", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    photo = Photo.create(image: "https://robohash.org/test", caption: "caption", owner_id: user.id)
+    photo = Photo.create(image: File.open("#{Rails.root}/spec/support/test_image.jpeg"), caption: "caption", owner_id: user.id)
     like = Like.create(photo_id: photo.id, fan_id: user.id)
 
     visit "/likes/#{like.id}/edit"
@@ -175,7 +175,7 @@ describe "Authorization" do
   end
 
   it "does not allow a user to view all comments", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/comments"
@@ -184,10 +184,10 @@ describe "Authorization" do
   end
 
   it "does not allow a user to view a comment show page", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    photo = Photo.create(image: "https://robohash.org/test", caption: "caption", owner_id: user.id)
+    photo = Photo.create(image: File.open("#{Rails.root}/spec/support/test_image.jpeg"), caption: "caption", owner_id: user.id)
     comment = Comment.create(photo_id: photo.id, author_id: user.id, body: "comment")
 
     visit "/comments/#{comment.id}"
@@ -196,7 +196,7 @@ describe "Authorization" do
   end
 
   it "does not allow a user to view all follow requests", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/follow_requests"
@@ -205,10 +205,10 @@ describe "Authorization" do
   end
 
   it "does not allow a user to view a follow request show page", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: "https://robohash.org/bob")
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     follow_request = FollowRequest.create(sender_id: user.id, recipient_id: other_user.id, status: "pending")
 
     visit "/follow_requests/#{follow_request.id}"
@@ -217,10 +217,10 @@ describe "Authorization" do
   end
 
   it "does not allow a user to view a follow request edit page", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: "https://robohash.org/bob")
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     follow_request = FollowRequest.create(sender_id: user.id, recipient_id: other_user.id, status: "pending")
 
     visit "/follow_requests/#{follow_request.id}/edit"
@@ -229,11 +229,11 @@ describe "Authorization" do
   end
 
   it "does not allow a user to visit the edit page for another user's photo", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: "https://robohash.org/bob")
-    photo = Photo.create(image: "https://robohash.org/test", caption: "caption", owner_id: other_user.id)
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
+    photo = Photo.create(image: File.open("#{Rails.root}/spec/support/test_image.jpeg"), caption: "caption", owner_id: other_user.id)
 
     visit "/photos/#{photo.id}/edit"
 
@@ -242,11 +242,11 @@ describe "Authorization" do
   end
 
   it "does not allow a user to visit the edit page for another user's comment", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
-    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: "https://robohash.org/bob")
-    photo = Photo.create(image: "https://robohash.org/test", caption: "caption", owner_id: other_user.id)
+    other_user = User.create(username: "bob", email: "bob@example.com", password: "password", private: false, avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
+    photo = Photo.create(image: File.open("#{Rails.root}/spec/support/test_image.jpeg"), caption: "caption", owner_id: other_user.id)
     comment = Comment.create(photo_id: photo.id, author_id: other_user.id, body: "comment")
 
     visit "/comments/#{comment.id}/edit"

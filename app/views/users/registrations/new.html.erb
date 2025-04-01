@@ -173,7 +173,7 @@
 
             <%= f.label :avatar_image %>
 
-            <%= f.text_field :avatar_image, :class => avatar_image_class, :placeholder => "Enter avatar image" %>
+            <%= f.file_field :avatar_image, :class => avatar_image_class, :placeholder => "Enter avatar image" %>
 
             <% if avatar_image_was_invalid %>
               <% resource.errors.full_messages_for(:avatar_image).each do |message| %>

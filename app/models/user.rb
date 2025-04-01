@@ -33,6 +33,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  mount_uploader :avatar_image, ImageUploader
+         
   has_many :comments, foreign_key: :author_id, dependent: :destroy
 
   has_many :sent_follow_requests, foreign_key: :sender_id, class_name: "FollowRequest", dependent: :destroy
@@ -71,7 +73,7 @@ class User < ApplicationRecord
 
   validates :website, url: { allow_blank: true }
 
-  validates :avatar_image, presence: true, url: true
+  validates :avatar_image, presence: true
 
   scope :past_week, -> { where(created_at: 1.week.ago...) }
 

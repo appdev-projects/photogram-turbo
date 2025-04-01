@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body py-3 d-flex align-items-center justify-content-between">
         <h2 class="h5 m-0 p-0 d-flex align-items-center">
-          <%= image_tag photo.owner.avatar_image, class: "rounded-circle me-2", width: 36 %>
+          <%= image_tag photo.owner.avatar_image_url, class: "rounded-circle me-2 img-cover img-small" %>
 
           <%= link_to photo.owner.username, user_path(photo.owner.username), class: "text-dark link-underline-dark link-underline-opacity-0 link-underline-opacity-100-hover", data: { turbo: false } %>
         </h2>
@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <%= image_tag photo.image, class: "img-fluid" %>
+      <%= image_tag photo.image_url, class: "img-fluid" %>
 
       <div class="card-body">
         <div class="mb-3 d-flex justify-content-between">

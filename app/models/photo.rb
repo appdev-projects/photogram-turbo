@@ -20,6 +20,8 @@
 #  fk_rails_...  (owner_id => users.id)
 #
 class Photo < ApplicationRecord
+  mount_uploader :image, ImageUploader
+
   belongs_to :owner, class_name: "User", counter_cache: true
 
   has_many :comments, dependent: :destroy
@@ -30,7 +32,7 @@ class Photo < ApplicationRecord
 
   validates :caption, presence: true
 
-  validates :image, presence: true, url: true
+  validates :image, presence: true
 
   scope :latest, -> { order(created_at: :desc) }
 end

@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "/" do
   it "can be visited", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/"
@@ -11,7 +11,7 @@ describe "/" do
   end
 
   it "has a bootstrap navbar", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/"
@@ -20,7 +20,7 @@ describe "/" do
   end
 
   it "has an edit profile link for the signed in user", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/"
@@ -29,7 +29,7 @@ describe "/" do
   end
 
   it "does not have a sign in link if the user is already signed in", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/"
@@ -38,7 +38,7 @@ describe "/" do
   end
 
   it "has a link, 'Feed', that navigates to the 'Feed' page", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/"
@@ -49,7 +49,7 @@ describe "/" do
   end
 
   it "has a link, 'Discover', that navigates to the 'Discover' page", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/"
@@ -60,7 +60,7 @@ describe "/" do
   end
 
   it "has a link, 'Your profile', that navigates to the profile page", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/"
@@ -71,7 +71,7 @@ describe "/" do
   end
 
   it "has a link, 'Add post', that navigates to the new photo page", points: 1 do
-    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: "https://robohash.org/alice")
+    user = User.create(username: "alice", email: "alice@example.com", password: "password", avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg"))
     sign_in(user)
 
     visit "/"

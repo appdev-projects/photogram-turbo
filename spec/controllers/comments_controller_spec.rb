@@ -9,19 +9,19 @@ RSpec.describe CommentsController, type: :controller do
         username: "test",
         email: "test@example.com",
         password: "password",
-        avatar_image: "https://robohash.org/test.png"
+        avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg")
       )
 
       author = User.create(
         username: "author",
         email: "author@example.com",
         password: "password",
-        avatar_image: "https://robohash.org/author.png"
+        avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg")
       )
 
       photo = Photo.create(
         caption: "hi there :3",
-        image: "https://robohash.org/photo.png",
+        image: File.open("#{Rails.root}/spec/support/test_image.jpeg"),
         owner: owner
       )
 
@@ -48,19 +48,19 @@ RSpec.describe CommentsController, type: :controller do
         username: "test",
         email: "test@example.com",
         password: "password",
-        avatar_image: "https://robohash.org/test.png"
+        avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg")
       )
 
       author = User.create(
         username: "author",
         email: "author@example.com",
         password: "password",
-        avatar_image: "https://robohash.org/author.png"
+        avatar_image: File.open("#{Rails.root}/spec/support/test_image.jpeg")
       )
 
       photo = Photo.create(
         caption: "hi there :3",
-        image: "https://robohash.org/photo.png",
+        image: File.open("#{Rails.root}/spec/support/test_image.jpeg"),
         owner: owner
       )
 
