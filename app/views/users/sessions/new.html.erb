@@ -18,7 +18,7 @@
           </div>
         <% end %>
 
-        <% form_html_options = { novalidate: true, class: "mb-3" } %>
+        <% form_html_options = { novalidate: true, class: "mb-3", data: { turbo: false} } %>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: form_html_options) do |f| %>
           <div class="form-group">
