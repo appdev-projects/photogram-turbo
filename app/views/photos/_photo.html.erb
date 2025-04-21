@@ -36,9 +36,7 @@
             <%= render "comments/comment", comment: comment %>
           <% end %>
           
-          <div class="card-body">
-            <%= render "comments/form", comment: photo.comments.build %>
-          </div>
+          <%= render "comments/form", comment: photo.comments.build %>
         </ul>
       <% end %>
     </div>
