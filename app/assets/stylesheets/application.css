@@ -9,22 +9,6 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-.img-cover {
-  object-fit: cover;
-  object-position: center;
-}
-
-.img-small {
-  width: 36px;
-  height: 36px;
-}
-
-.img-medium {
-  width: 128px;
-  height: 128px;
-}
-
-.img-large {
-  width: 200px;
-  height: 200px;
-}
+@import "bootstrap-utilities.css";
+@import "pico.pagy.css";
+@import "pico.firstdraft.css";
